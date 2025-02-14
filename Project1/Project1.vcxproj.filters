@@ -44,5 +44,11 @@
     <ClInclude Include="Grid.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="pnj.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pnj.cpp" />
   </ItemGroup>
 </Project>
