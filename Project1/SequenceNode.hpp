@@ -8,4 +8,5 @@ private:
 public:
     void AddChild(std::unique_ptr<BTNode> child);
     NodeState execute() override;
+   // std::vector<std::unique_ptr<BTNode>> getChildren();
 };

@@ -1,9 +1,9 @@
 #include "Blackboard.hpp"
 
 
-void Blackboard::SetValue(const std::string& key, int value) {
+void Blackboard::SetValue(const int& key, int value) {
     data[key] = value;
 }
-int Blackboard::GetValue(const std::string& key) {
+int Blackboard::GetValue(const int& key) {
     return data[key];
 }

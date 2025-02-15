@@ -6,9 +6,10 @@
 class ConditionNode : public BTNode {
 private:
     Blackboard& blackboard;
-    std::string key;
+    int key;
     int expectedValue;
 public:
-    ConditionNode(Blackboard& bb, const std::string& key, int value) : blackboard(bb), key(key), expectedValue(value) {}
+    ConditionNode(Blackboard& bb, const int& key, int value) : blackboard(bb), key(key), expectedValue(value) {}
     NodeState execute() override;
+    int& getExpectedValue();
 };

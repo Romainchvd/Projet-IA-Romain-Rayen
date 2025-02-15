@@ -5,8 +5,8 @@
 
 class Blackboard {
 private:
-    std::unordered_map<std::string, int> data;
+    std::unordered_map<int, int> data;
 public:
-    void SetValue(const std::string& key, int value);
-    int GetValue(const std::string& key);
+    void SetValue(const int& key, int value);
+    int GetValue(const int& key);
 };
