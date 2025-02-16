@@ -42,7 +42,7 @@ int main() {
     root->AddChild(std::make_shared<ActionNode>("Patrouiller"));
 
     while (window.isOpen()) {
-        blackboard.SetValue(1, PlayerDetected);
+        blackboard.SetValue(PlayerDetected, 1);
         if (player.shape.getGlobalBounds().intersects(enemies[0].shape.getGlobalBounds()))
         {
             PlayerDetected = 1;
