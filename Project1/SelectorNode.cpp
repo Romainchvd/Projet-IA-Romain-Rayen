@@ -1,7 +1,7 @@
 #include "SelectorNode.hpp"
 
-void SelectorNode::AddChild(std::unique_ptr<BTNode> child) {
-    children.push_back(std::move(child));
+void SelectorNode::AddChild(std::shared_ptr<BTNode> child) {
+    children.push_back(child);
 }
 NodeState SelectorNode::execute() {
     for (auto& child : children) {
@@ -12,4 +12,4 @@ NodeState SelectorNode::execute() {
     return NodeState::FAILURE;
 }
 
-//std::vector<std::unique_ptr<BTNode>> SelectorNode::getChildren() { return children; }
+std::vector<std::shared_ptr<BTNode>> SelectorNode::getChildren() { return children; }

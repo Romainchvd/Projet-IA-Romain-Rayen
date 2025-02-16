@@ -30,38 +30,39 @@ int main() {
     int PlayerDetected = 0;
     
 
-    auto root = std::make_unique<SelectorNode>();
-    auto sequence = std::make_unique<SequenceNode>();
+    auto root = std::make_shared<SelectorNode>();
+    auto sequence = std::make_shared<SequenceNode>();
     FloatRect playerHitbox;
     
     
-    sequence->AddChild(std::make_unique<ConditionNode>(blackboard, PlayerDetected, 1));
-    sequence->AddChild(std::make_unique<ActionNode>("Attaquer"));
+    sequence->AddChild(std::make_shared<ConditionNode>(blackboard, PlayerDetected, 1));
+    sequence->AddChild(std::make_shared<ActionNode>("Attaquer"));
 
-    root->AddChild(std::move(sequence));
-    root->AddChild(std::make_unique<ActionNode>("Patrouiller"));
+    root->AddChild(sequence);
+    root->AddChild(std::make_shared<ActionNode>("Patrouiller"));
 
     while (window.isOpen()) {
         blackboard.SetValue(1, PlayerDetected);
-//      if(auto* sequenceNode = dynamic_cast<SequenceNode*>(root->getChildren()[0].get()))
-//      {
-//          if (auto* conditionNode = dynamic_cast<ConditionNode*>(sequenceNode->getChildren()[0].get()))
-//          {
-//              int& expectedValue = conditionNode->getExpectedValue();
-//              expectedValue = PlayerDetected;
-//          }
-//      }
-        playerHitbox.left = player.shape.getGlobalBounds().left + 100;
-        playerHitbox.top = player.shape.getGlobalBounds().top + 100;
-        playerHitbox.height = player.shape.getGlobalBounds().height + 100;
-        playerHitbox.width = player.shape.getGlobalBounds().width + 100;
-        if (playerHitbox.intersects(enemies[0].shape.getGlobalBounds()))
+        if (player.shape.getGlobalBounds().intersects(enemies[0].shape.getGlobalBounds()))
         {
             PlayerDetected = 1;
         }
         else
             PlayerDetected = 0;
-
+      if(auto* sequenceNode = dynamic_cast<SequenceNode*>(root->getChildren()[0].get()))
+      {
+          if (auto* conditionNode = dynamic_cast<ConditionNode*>(sequenceNode->getChildren()[0].get()))
+          {
+              int& expectedValue = conditionNode->getExpectedValue();
+              expectedValue = PlayerDetected;
+       }
+    }
+        playerHitbox.left = player.shape.getGlobalBounds().left + 100;
+        playerHitbox.top = player.shape.getGlobalBounds().top + 100;
+        playerHitbox.height = player.shape.getGlobalBounds().height + 100;
+        playerHitbox.width = player.shape.getGlobalBounds().width + 100;
+       
+        
         
 
         root->execute();
