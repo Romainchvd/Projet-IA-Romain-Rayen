@@ -1,6 +1,13 @@
 #include "ActionNode.hpp"
 
 NodeState ActionNode::execute() {
-    std::cout << "Action: " << actionName << std::endl;
+    if (actionName == "Suivre")
+    {
+        cout << "Action : " << actionName << endl;
+    }
+    else
+    {
+        cout << "Action: " << actionName << endl;
+    }
     return NodeState::SUCCESS;
 }

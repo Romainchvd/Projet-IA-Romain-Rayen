@@ -1,4 +1,4 @@
-#include "PNJ.hpp"
+#include "pnj.h"
 
 PNJ::PNJ(sf::Vector2f startPos, float radiusDetect, float radiusCircle) {
     circle.setRadius(radiusCircle);
