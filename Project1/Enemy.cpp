@@ -8,15 +8,9 @@ void Enemy::update(float deltaTime, Grid& grid) {
 }
 void Enemy::chase(Player& player, Grid& grid)
 {
+
+	
 	Vector2f movement(0.f, 0.f);
-	sf::Vector2f direction = player.shape.getPosition() - position;
-	float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-
-	if (distance > 0) {
-		direction /= distance;
-		position += direction * 2.0f;
-	}
-
 			Vector2f newPosition = shape.getPosition() + movement;
 			FloatRect newBounds(newPosition, shape.getSize());
 			auto isWalkable = [&](float x, float y) {
@@ -25,13 +19,21 @@ void Enemy::chase(Player& player, Grid& grid)
 				return gridX >= 0 && gridX < GRID_WIDTH && gridY >= 0 && gridY < GRID_HEIGHT && grid.getCell(gridX, gridY).walkable;
 				};
 			shape.setPosition(position);
-			//if (isWalkable(newBounds.left, newBounds.top) &&
-			//	isWalkable(newBounds.left + newBounds.width - 1, newBounds.top) &&
-			//	isWalkable(newBounds.left, newBounds.top + newBounds.height - 1) &&
-			//	isWalkable(newBounds.left + newBounds.width - 1, newBounds.top + newBounds.height - 1)) {
-			//	shape.setPosition(position);
-			//}
-			
+			if (isWalkable(newBounds.left, newBounds.top) &&
+				isWalkable(newBounds.left + newBounds.width - 1, newBounds.top) &&
+				isWalkable(newBounds.left, newBounds.top + newBounds.height - 1) &&
+				isWalkable(newBounds.left + newBounds.width - 1, newBounds.top + newBounds.height - 1)) {
+				
+				sf::Vector2f direction = player.shape.getPosition() - position;
+				float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+
+				if (distance > 0) {
+					direction /= distance;
+					position += direction * 2.0f;
+				}
+				shape.setPosition(position);
+			}
+
 }
 
 void Enemy::patroll() {
