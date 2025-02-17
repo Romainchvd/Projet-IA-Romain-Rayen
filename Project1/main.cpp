@@ -17,7 +17,7 @@ int main() {
     window.setFramerateLimit(60);
 
     Player player(200, 400);
-    vector<Enemy> enemies = { Enemy(100, 100), Enemy(700, 100) };
+    vector<Enemy> enemies = { Enemy(75, 100), Enemy(700, 100) };
     enemies[0].shape.setFillColor(Color::Green);
     Grid grid;
     grid.loadFromFile("map.txt");
@@ -34,21 +34,21 @@ int main() {
     
     
     sequence->AddChild(make_shared<ConditionNode>(blackboard, PlayerDetected, 1));
-    sequence->AddChild(make_shared<ActionNode>("Suivre"));
+    sequence->AddChild(make_shared<ActionNode>("Suivre", enemies[0], grid, player));
     
 
     root->AddChild(sequence);
-    root->AddChild(make_shared<ActionNode>("Patrouiller"));
+    root->AddChild(make_shared<ActionNode>("Patrouiller", enemies[0], grid, player));
 
     while (window.isOpen()) {
         
         blackboard.SetValue(PlayerDetected, 1);
-        if (PlayerDetected == 1)
-        {
-            enemies[0].chase(player, grid);
-        }
-        else
-            enemies[0].patroll();
+        //if (PlayerDetected == 1)
+        //{
+        //    enemies[0].chase(player, grid);
+        //}
+        //else
+        //    enemies[0].patroll();
 
         playerHitbox.left = player.shape.getGlobalBounds().left - detectionMargin;
         playerHitbox.top = player.shape.getGlobalBounds().top - detectionMargin;

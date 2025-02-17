@@ -39,7 +39,7 @@ void Enemy::chase(Player& player, Grid& grid)
 void Enemy::patroll() {
 
 		static int currentWaypoint = 0;
-		static Vector2f waypoints[2] = {Vector2f(100, 100), Vector2f(100, 300) };
+		static Vector2f waypoints[2] = {Vector2f(75, 100), Vector2f(75, 300) };
 		Vector2f target = waypoints[currentWaypoint];
 		Vector2f direction = target - position;
 		float distance = sqrt(direction.x * direction.x + direction.y * direction.y);

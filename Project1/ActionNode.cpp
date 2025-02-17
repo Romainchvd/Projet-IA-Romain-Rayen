@@ -3,11 +3,11 @@
 NodeState ActionNode::execute() {
     if (actionName == "Suivre")
     {
-        cout << "Action : " << actionName << endl;
+        enemy.chase(player, grid);
     }
     else
     {
-        cout << "Action: " << actionName << endl;
+        enemy.patroll();
     }
     return NodeState::SUCCESS;
 }
