@@ -10,40 +10,46 @@ using namespace sf;
 
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;
-const int detectionMargin = 100;
+const int detectionMargin = 150;
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Jeu SFML - IA Ennemis");
     window.setFramerateLimit(60);
 
     Player player(200, 400);
-    std::vector<Enemy> enemies = { Enemy(100, 100), Enemy(700, 100) };
+    vector<Enemy> enemies = { Enemy(100, 100), Enemy(700, 100) };
     enemies[0].shape.setFillColor(Color::Green);
     Grid grid;
     grid.loadFromFile("map.txt");
 
-    sf::Clock clock;
+    Clock clock;
 
     Blackboard blackboard;
     int PlayerDetected = 0;
     
 
-    auto root = std::make_shared<SelectorNode>();
-    auto sequence = std::make_shared<SequenceNode>();
+    auto root = make_shared<SelectorNode>();
+    auto sequence = make_shared<SequenceNode>();
     FloatRect playerHitbox;
     
     
-    sequence->AddChild(std::make_shared<ConditionNode>(blackboard, PlayerDetected, 1));
-    sequence->AddChild(std::make_shared<ActionNode>("Suivre"));
+    sequence->AddChild(make_shared<ConditionNode>(blackboard, PlayerDetected, 1));
+    sequence->AddChild(make_shared<ActionNode>("Suivre"));
     
 
     root->AddChild(sequence);
-    root->AddChild(std::make_shared<ActionNode>("Patrouiller"));
+    root->AddChild(make_shared<ActionNode>("Patrouiller"));
 
     while (window.isOpen()) {
+        
         blackboard.SetValue(PlayerDetected, 1);
-        if(PlayerDetected == 1)
+        if (PlayerDetected == 1)
+        {
             enemies[0].chase(player, grid);
+        }
+        else
+            enemies[0].patroll();
+
         playerHitbox.left = player.shape.getGlobalBounds().left - detectionMargin;
         playerHitbox.top = player.shape.getGlobalBounds().top - detectionMargin;
         playerHitbox.height = player.shape.getGlobalBounds().height + detectionMargin*2;
@@ -76,6 +82,8 @@ int main() {
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
+                window.close();
+            if(event.type == Event::KeyPressed && event.key.code == Keyboard::Enter)
                 window.close();
         }
 
