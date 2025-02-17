@@ -1,7 +1,7 @@
 #include "Enemy.hpp"
 #include <cmath>
 using namespace sf;
-Enemy::Enemy(float x, float y) : Entity(x, y, sf::Color::Red) { position = shape.getPosition(); }
+Enemy::Enemy(float x, float y) : Entity(x, y, Color::Red) { position = shape.getPosition(); }
 
 void Enemy::update(float deltaTime, Grid& grid) {
 
@@ -24,8 +24,8 @@ void Enemy::chase(Player& player, Grid& grid)
 				isWalkable(newBounds.left, newBounds.top + newBounds.height - 1) &&
 				isWalkable(newBounds.left + newBounds.width - 1, newBounds.top + newBounds.height - 1)) {
 				
-				sf::Vector2f direction = player.shape.getPosition() - position;
-				float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+				Vector2f direction = player.shape.getPosition() - position;
+				float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
 
 				if (distance > 0) {
 					direction /= distance;

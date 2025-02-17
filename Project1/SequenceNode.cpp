@@ -1,7 +1,7 @@
 #include "SequenceNode.hpp"
+using namespace std;
 
-
-void SequenceNode::AddChild(std::shared_ptr<BTNode> child) {
+void SequenceNode::AddChild(shared_ptr<BTNode> child) {
     children.push_back(child);
 }
 NodeState SequenceNode::execute()  {
@@ -13,4 +13,4 @@ NodeState SequenceNode::execute()  {
     return NodeState::SUCCESS;
 }
 
-std::vector<std::shared_ptr<BTNode>> SequenceNode::getChildren() { return children; }
+vector<shared_ptr<BTNode>> SequenceNode::getChildren() { return children; }

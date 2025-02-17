@@ -1,6 +1,6 @@
 #include "SelectorNode.hpp"
-
-void SelectorNode::AddChild(std::shared_ptr<BTNode> child) {
+using namespace std;
+void SelectorNode::AddChild(shared_ptr<BTNode> child) {
     children.push_back(child);
 }
 NodeState SelectorNode::execute() {
@@ -12,4 +12,4 @@ NodeState SelectorNode::execute() {
     return NodeState::FAILURE;
 }
 
-std::vector<std::shared_ptr<BTNode>> SelectorNode::getChildren() { return children; }
+vector<shared_ptr<BTNode>> SelectorNode::getChildren() { return children; }

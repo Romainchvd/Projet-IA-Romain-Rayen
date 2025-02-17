@@ -2,9 +2,9 @@
 #include "BTNode.hpp"
 class SelectorNode : public BTNode {
 private:
-    std::vector<std::shared_ptr<BTNode>> children;
+    vector<shared_ptr<BTNode>> children;
 public:
-    void AddChild(std::shared_ptr<BTNode> child);
+    void AddChild(shared_ptr<BTNode> child);
     NodeState execute() override;
-    std::vector<std::shared_ptr<BTNode>> getChildren();
+    vector<shared_ptr<BTNode>> getChildren();
 };
