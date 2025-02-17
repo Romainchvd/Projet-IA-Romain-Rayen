@@ -24,13 +24,13 @@ void Enemy::chase(Player& player, Grid& grid)
 				int gridY = static_cast<int>(y / CELL_SIZE);
 				return gridX >= 0 && gridX < GRID_WIDTH && gridY >= 0 && gridY < GRID_HEIGHT && grid.getCell(gridX, gridY).walkable;
 				};
-
-			if (isWalkable(newBounds.left, newBounds.top) &&
-				isWalkable(newBounds.left + newBounds.width - 1, newBounds.top) &&
-				isWalkable(newBounds.left, newBounds.top + newBounds.height - 1) &&
-				isWalkable(newBounds.left + newBounds.width - 1, newBounds.top + newBounds.height - 1)) {
-				shape.setPosition(position);
-			}
+			shape.setPosition(position);
+			//if (isWalkable(newBounds.left, newBounds.top) &&
+			//	isWalkable(newBounds.left + newBounds.width - 1, newBounds.top) &&
+			//	isWalkable(newBounds.left, newBounds.top + newBounds.height - 1) &&
+			//	isWalkable(newBounds.left + newBounds.width - 1, newBounds.top + newBounds.height - 1)) {
+			//	shape.setPosition(position);
+			//}
 			
 }
 
