@@ -1,6 +1,7 @@
 #include "Player.hpp"
 #include <vector>
 #include "BTEnemy.hpp"
+#include "FSMEnemy.hpp"
 using namespace std;
 using namespace sf;
 
@@ -18,7 +19,7 @@ int main() {
     Clock clock;
     FloatRect playerHitbox;
     BTEnemy btEnemy((float)75, (float)100, grid, player);
-    
+    FSMEnemy fsmEnemy((float)650, (float)100, grid, player);
 
     
 
@@ -38,12 +39,13 @@ int main() {
 
         player.update(deltaTime, grid);
         btEnemy.update(deltaTime, grid);
+        fsmEnemy.update(deltaTime, grid);
 
         window.clear();
         grid.draw(window);
-        window.draw(player.shape);
-       
-            window.draw(btEnemy.shape);
+        window.draw(player.shape);       
+        window.draw(btEnemy.shape);
+        window.draw(fsmEnemy.shape);
         window.display();
     }
     return 0;
