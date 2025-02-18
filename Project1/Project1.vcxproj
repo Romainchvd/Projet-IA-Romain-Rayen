@@ -139,6 +139,7 @@
   <ItemGroup>
     <ClCompile Include="ActionNode.cpp" />
     <ClCompile Include="Blackboard.cpp" />
+    <ClCompile Include="BTEnemy.cpp" />
     <ClCompile Include="ConditionNode.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -151,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="ActionNode.hpp" />
     <ClInclude Include="Blackboard.hpp" />
+    <ClInclude Include="BTEnemy.hpp" />
     <ClInclude Include="BTNode.hpp" />
     <ClInclude Include="ConditionNode.hpp" />
     <ClInclude Include="Enemy.hpp" />

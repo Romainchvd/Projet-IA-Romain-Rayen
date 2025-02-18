@@ -1,5 +1,5 @@
 #include "ActionNode.hpp"
-
+#include "BTEnemy.hpp"
 NodeState ActionNode::execute() {
     if (actionName == "Suivre")
     {

@@ -1,5 +1,4 @@
-#ifndef ENEMY_HPP
-#define ENEMY_HPP
+#pragma once
 
 #include "Entity.hpp"
 #include "Player.hpp"
@@ -9,12 +8,7 @@ class Enemy : public Entity {
 public:
     static constexpr float SPEED = 100.0f;
     Vector2f position;
-    Enemy(float x, float y);
+    virtual void patroll() = 0;
     void update(float deltaTime, Grid& grid) override;
-    void chase(Player& player, Grid& grid);
-    void patroll();
-    void resetPos();
+    Enemy(float x, float y);
 };
-
-
-#endif // ENEMY_HPP

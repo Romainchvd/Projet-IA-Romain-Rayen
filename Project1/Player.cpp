@@ -29,4 +29,8 @@ void Player::update(float deltaTime, Grid& grid) {
         isWalkable(newBounds.left + newBounds.width - 1, newBounds.top + newBounds.height - 1)) {
         shape.move(movement);
     }
+    hitbox.left =shape.getGlobalBounds().left - detectionMargin;
+    hitbox.top = shape.getGlobalBounds().top - detectionMargin;
+    hitbox.height = shape.getGlobalBounds().height + detectionMargin * 2;
+    hitbox.width = shape.getGlobalBounds().width + detectionMargin * 2;
 }
