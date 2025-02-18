@@ -37,6 +37,7 @@ void FSMEnemy::runFSM(float deltaTime)
             chase();
             if (PlayerDetected == 0) {
                 lastPlayerPosition = player.shape.getPosition();
+                
                 currentState = SEARCH;
             }
             break;
@@ -81,23 +82,23 @@ void FSMEnemy::chase()
 }
 void FSMEnemy::search(float deltaTime) {
     static float searchTimer = 0.0f;
-    static sf::Vector2f searchDirection;
+    static Vector2f searchDirection;
 
     if (searchTimer == 0.0f) {
-        searchDirection = sf::Vector2f(rand() % 2 == 0 ? -1 : 1, rand() % 2 == 0 ? -1 : 1);
-        searchDirection /= std::sqrt(searchDirection.x * searchDirection.x + searchDirection.y * searchDirection.y);
+        searchDirection = Vector2f(rand() % 2 == 0 ? -1 : 1, rand() % 2 == 0 ? -1 : 1);
+        searchDirection /= sqrt(searchDirection.x * searchDirection.x + searchDirection.y * searchDirection.y);
     }
 
     searchTimer += deltaTime;
     if (searchTimer < 10.0f) {
-        position += searchDirection * 5.f * deltaTime;
+        position += searchDirection* 5.f * deltaTime;
     }
     else {
         searchTimer = 0.0f;
         currentState = PATROL;
     }
 
-    float distance = std::sqrt((lastPlayerPosition.x - position.x) * (lastPlayerPosition.x - position.x) + (lastPlayerPosition.y - position.y) * (lastPlayerPosition.y - position.y));
+    float distance = sqrt((lastPlayerPosition.x - position.x) * (lastPlayerPosition.x - position.x) + (lastPlayerPosition.y - position.y) * (lastPlayerPosition.y - position.y));
     if (distance < player.detectionMargin) {
         searchTimer = 0.0f;
     }

@@ -17,5 +17,6 @@ public:
 	Player& player;
 	int PlayerDetected = 0;
 	State currentState = PATROL;
+	bool isSearching = false;
 };
 
