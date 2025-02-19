@@ -2,6 +2,7 @@
 #include <vector>
 #include "BTEnemy.hpp"
 #include "FSMEnemy.hpp"
+#include "GOAPAgent.hpp"
 using namespace std;
 using namespace sf;
 
@@ -20,7 +21,7 @@ int main() {
     FloatRect playerHitbox;
     BTEnemy btEnemy((float)75, (float)100, grid, player);
     FSMEnemy fsmEnemy((float)650, (float)100, grid, player);
-
+    GOAPAgent goapEnemy(200, 400, player, grid);
     
 
     while (window.isOpen()) {
@@ -40,12 +41,14 @@ int main() {
         player.update(deltaTime, grid);
         btEnemy.update(deltaTime, grid);
         fsmEnemy.update(deltaTime, grid);
+        goapEnemy.PerformActions();
 
         window.clear();
         grid.draw(window);
         window.draw(player.shape);       
         window.draw(btEnemy.shape);
         window.draw(fsmEnemy.shape);
+        window.draw(goapEnemy.enemy.shape);
         window.display();
     }
     return 0;

@@ -7,7 +7,7 @@ NodeState ActionNode::execute() {
     }
     else
     {
-        enemy.patroll();
+        enemy.patrol();
     }
     return NodeState::SUCCESS;
 }

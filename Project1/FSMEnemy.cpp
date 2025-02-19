@@ -3,7 +3,7 @@
 FSMEnemy::FSMEnemy(float x, float y, Grid& grid, Player& player) :Enemy(x, y), grid(grid), player(player) { shape.setFillColor(Color::Red);
 shape.setPosition(x, y); position = shape.getPosition(); }
 
-void FSMEnemy::patroll() {
+void FSMEnemy::patrol() {
     static int currentWaypoint = 0;
     static Vector2f waypoints[4] = { Vector2f(650, 100), Vector2f(400, 100), Vector2f(400, 200), Vector2f(650, 200)};
     Vector2f target = waypoints[currentWaypoint];
@@ -29,7 +29,7 @@ void FSMEnemy::runFSM(float deltaTime)
 {
         switch (currentState) {
         case PATROL:
-            patroll();
+            patrol();
             if (PlayerDetected == 1) currentState = CHASE;
             break;
 

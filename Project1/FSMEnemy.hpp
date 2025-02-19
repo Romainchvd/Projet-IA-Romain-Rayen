@@ -6,7 +6,7 @@ class FSMEnemy : public Enemy
 {
 public:
 	FSMEnemy(float x , float y, Grid& grid, Player& player);
-	void patroll() override;
+	void patrol() override;
 	void update(float deltaTime, Grid& grid) override;
 	void runFSM(float deltaTime);
 	void chase();
