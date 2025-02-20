@@ -24,7 +24,11 @@ public:
 	void update();
 	void draw();
 	void input();
+	bool isPaused = false;
 	bool isRunning = true;
+	void pause();
+	void disableEveryShape();
+	void enableEveryShape();
 	Game(RenderWindow& window);
 };
 

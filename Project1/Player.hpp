@@ -18,6 +18,7 @@ public:
     int detectionMargin = 100;
     int endOfDetectionMargin = 125;
     bool onColision = false;
+    bool doDraw = true;
 
 };
 

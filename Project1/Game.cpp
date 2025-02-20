@@ -41,36 +41,49 @@ void Game::input() { //Gestion des entrées utilisateurs
                 fsmEnemy.toggleDraw();
             if (event.key.code == Keyboard::B)
                 btEnemy.toggleDraw();
+            if (event.key.code == Keyboard::P)
+                pause();
+            if (event.key.code == Keyboard::I)
+                enableEveryShape();
+            if (event.key.code == Keyboard::O)
+                disableEveryShape();
+            //Les deux derniers boutons ne stoppent pas le jeu et sont utilisées uniquement à des fins de practicité pour des
+            //captures d'écran pour la soutenance.
         }
     }
 }
 
 void Game::update() {
-    Time dt = clock.restart();
-    float deltaTime = dt.asSeconds();
-
-    if (player.shape.getGlobalBounds().intersects(btEnemy.shape.getGlobalBounds()) ||
-        player.shape.getGlobalBounds().intersects(fsmEnemy.shape.getGlobalBounds()) ||
-        player.shape.getGlobalBounds().intersects(goapEnemy.enemy.shape.getGlobalBounds()))
+    if(!isPaused)
     {
-        player.onColision = true;                        //Cette condition permet de vérifier si le joueur entre en contact avec un ennemi pour éviter les conflits lors du changement de couleur (checkColision dans les .cpp d'ennemis)
-    }
-    else
-        player.onColision = false; 
+        Time dt = clock.restart();
+        float deltaTime = dt.asSeconds();
 
-    player.update(deltaTime);
-    if (btEnemy.isAlive)
-        btEnemy.update(deltaTime);
-    if (fsmEnemy.isAlive)
-        fsmEnemy.update(deltaTime);
-    if (goapEnemy.enemy.isAlive)
-        goapEnemy.PerformActions();
-    //Les attributs isAlive sont gérés via le toggle
+        if (player.shape.getGlobalBounds().intersects(btEnemy.shape.getGlobalBounds()) ||
+            player.shape.getGlobalBounds().intersects(fsmEnemy.shape.getGlobalBounds()) ||
+            player.shape.getGlobalBounds().intersects(goapEnemy.enemy.shape.getGlobalBounds()))
+        {
+            player.onColision = true;                        //Cette condition permet de vérifier si le joueur entre en contact avec un ennemi pour éviter les conflits lors du changement de couleur (checkColision dans les .cpp d'ennemis)
+        }
+        else
+            player.onColision = false;
+
+        player.update(deltaTime);
+        if (btEnemy.isAlive)
+            btEnemy.update(deltaTime);
+        if (fsmEnemy.isAlive)
+            fsmEnemy.update(deltaTime);
+        if (goapEnemy.enemy.isAlive)
+            goapEnemy.PerformActions();
+        //Les attributs isAlive sont gérés via le toggle
+    }
+    
 }
 
 void Game::draw() {
     window.clear();
     grid.draw(window);
+    if(player.doDraw)
     window.draw(player.shape);
     if (btEnemy.doDraw)
         window.draw(btEnemy.shape);
@@ -80,4 +93,26 @@ void Game::draw() {
         window.draw(goapEnemy.enemy.shape);
     //doDraw géré de la même manière
     window.display();
+}
+
+void Game::pause() {
+    if (isPaused)
+        isPaused = false;
+    else
+        isPaused = true;
+    //Permet de mettre le jeu en pause
+}
+
+void Game::disableEveryShape() {
+        player.doDraw = false;
+        goapEnemy.enemy.doDraw = false;
+        fsmEnemy.doDraw = false;
+        btEnemy.doDraw = false;
+}
+
+void Game::enableEveryShape() {
+    player.doDraw = true;
+    goapEnemy.enemy.doDraw = true;
+    fsmEnemy.doDraw = true;
+    btEnemy.doDraw = true;
 }
