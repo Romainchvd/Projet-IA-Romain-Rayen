@@ -66,8 +66,11 @@ int main() {
             player.onColision = false;
 
         player.update(deltaTime, grid);
+        if(doDrawBT)
         btEnemy.update(deltaTime, grid);
+        if(doDrawFSM)
         fsmEnemy.update(deltaTime, grid);
+        if(doDrawGOAP)
         goapEnemy.PerformActions();
 
         window.clear();
