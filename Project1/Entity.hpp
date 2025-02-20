@@ -11,7 +11,7 @@ public:
     
 
     Entity(float x, float y, Color color);
-    virtual void update(float deltaTime, Grid& grid) = 0;
+    virtual void update(float deltaTime) = 0;
 };
 
 #endif // ENTITY_HPP

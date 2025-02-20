@@ -6,9 +6,9 @@
 
 using namespace std;
 using namespace sf;
-Player::Player(float x, float y) : Entity(x, y, Color::Blue) {}
+Player::Player(float x, float y, Grid& grid) : Entity(x, y, Color::Blue), grid(grid) {}
 
-void Player::update(float deltaTime, Grid& grid) {
+void Player::update(float deltaTime) {
     Vector2f movement(0.f, 0.f);
     if (Keyboard::isKeyPressed(Keyboard::Z)) movement.y -= SPEED * deltaTime;
     if (Keyboard::isKeyPressed(Keyboard::S)) movement.y += SPEED * deltaTime;

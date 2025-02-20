@@ -7,6 +7,7 @@ BTEnemy::BTEnemy(float posX, float posY, Grid& grid, Player& player) : Enemy(pos
 	root->AddChild(sequence);
 	root->AddChild(make_shared<ActionNode>("Patrouiller", *this, grid, player));
 	position = shape.getPosition();
+	//L'arbre est créé dans le constructeur de l'objet
 }
 
 void BTEnemy::patrol()
@@ -25,8 +26,36 @@ void BTEnemy::patrol()
 		direction /= distance;
 		position += direction * 2.0f;
 	}
+	Vector2f newPosition = shape.getPosition();
+	FloatRect newBounds(newPosition, shape.getSize());
+	auto isWalkable = [&](float x, float y) {
+		int gridX = static_cast<int>(x / CELL_SIZE);
+		int gridY = static_cast<int>(y / CELL_SIZE);
+		return gridX >= 0 && gridX < GRID_WIDTH && gridY >= 0 && gridY < GRID_HEIGHT && grid.getCell(gridX, gridY).walkable;
+		};
+	if (isWalkable(newBounds.left, newBounds.top) &&
+		isWalkable(newBounds.left + newBounds.width - 1, newBounds.top) &&
+		isWalkable(newBounds.left, newBounds.top + newBounds.height - 1) &&
+		isWalkable(newBounds.left + newBounds.width - 1, newBounds.top + newBounds.height - 1)) {
 
-	shape.setPosition(position);
+		shape.setPosition(position);
+		respawnClock.restart();
+	}
+	else
+	{
+		
+		doDraw = false;
+		cout << "CRASH!!!!!" << endl;
+		if (respawnClock.getElapsedTime().asSeconds() > respawnDuration.asSeconds())
+		{
+			doDraw = true;
+			position = waypoints[currentWaypoint];
+			shape.setPosition(position);
+		}
+		//Seul l'ennemi géré par le behaviorTree peut se crash. Dans le cas du FSM, l'ennemi stope la recherche en cas de crash et le GOAP se coince s'il fuit. En cas de patrouille
+		//pour les deux derniers, ils traversent les murs, le programme n'étant pas réalisé avec A* (trois algos). Tenter de bloquer la patrouille provoque un blocage permanent de l'ennemi,
+		//d'où le choix de le garder ainsi.
+	}
 }
 
 void BTEnemy::checkDetection()
@@ -78,7 +107,7 @@ void BTEnemy::chase()
 
 }
 
-void BTEnemy::update(float deltaTime, Grid& grid) {
+void BTEnemy::update(float deltaTime) {
 	checkDetection();
 	checkColision();
 	blackboard.SetValue(PlayerDetected, 1);
@@ -92,5 +121,7 @@ if (auto* sequenceNode = dynamic_cast<SequenceNode*>(root->getChildren()[0].get(
 		expectedValue = PlayerDetected;
 	}
 }
+//La fonction précédente met à jour l'accès à l'Attaque/Patrouille en fonction de si le joueur est détecté. La première condition empêche le programme de planter en tombant sur un pointeur
+//indéfini (d'où l'avertissement sur visual studio)
 root->execute();
 }

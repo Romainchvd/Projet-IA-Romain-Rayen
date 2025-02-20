@@ -7,7 +7,7 @@ class FSMEnemy : public Enemy
 public:
 	FSMEnemy(float x , float y, Grid& grid, Player& player);
 	void patrol() override;
-	void update(float deltaTime, Grid& grid) override;
+	void update(float deltaTime) override;
 	void runFSM(float deltaTime);
 	void chase();
 	void checkDetection();
@@ -19,5 +19,7 @@ public:
 	int PlayerDetected = 0;
 	State currentState = PATROL;
 	bool isSearching = false;
+	Clock respawnClock;
+	Time respawnDuration = seconds(5);
 };
 

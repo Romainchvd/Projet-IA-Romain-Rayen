@@ -19,11 +19,12 @@ void FSMEnemy::patrol() {
     }
 
     shape.setPosition(position);
+
 }
-void FSMEnemy::update(float deltaTime, Grid& grid) {
+void FSMEnemy::update(float deltaTime) {
     checkDetection();
     checkColision();
-    runFSM(deltaTime);
+    runFSM(deltaTime); //Accès à la fonction propre de l'algo
 
 }
 
@@ -129,5 +130,6 @@ void FSMEnemy::search(float deltaTime) {
         isWalkable(newBounds.left, newBounds.top + newBounds.height - 1) &&
         isWalkable(newBounds.left + newBounds.width - 1, newBounds.top + newBounds.height - 1))) {
         currentState = PATROL;
+        //Si le FSPEnemy entre en colision lors de la recherche, il reprend immédiatement sa patrouille
     }
 }

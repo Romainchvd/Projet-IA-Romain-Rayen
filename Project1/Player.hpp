@@ -11,9 +11,10 @@ public:
     FloatRect endOfDetectionArea;
     Clock detectionClock;
     Time detectionCooldown = seconds(0.4);
+    Grid& grid;
     static constexpr float SPEED = 200.0f;
-    Player(float x, float y);
-    void update(float deltaTime, Grid& grid) override;
+    Player(float x, float y, Grid& grid);
+    void update(float deltaTime) override;
     int detectionMargin = 100;
     int endOfDetectionMargin = 125;
     bool onColision = false;

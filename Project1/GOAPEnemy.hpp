@@ -14,5 +14,7 @@ public:
     void runAway();
     void checkPlayerDetected();
     void checkColision();
+    Clock respawnClock;
+    Time respawnDuration = seconds(5);
     GOAPEnemy(float x, float y, Player& player, Grid& grid);
 };

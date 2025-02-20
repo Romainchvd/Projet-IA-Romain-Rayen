@@ -9,14 +9,14 @@ void GOAPAgent::PerformActions() {
     else
         goal = Goal::Patrouiller;
     
-    std::vector<Action*> plan = planner.Plan(enemy, goal);
+    vector<Action*> plan = planner.Plan(enemy, goal);
     
     for (auto action : plan) {
         if (action->CanExecute(enemy)) {
             action->Execute(enemy);
         }
         else {
-            std::cout << "Action impossible : " << typeid(*action).name() << "\n";
+            cout << "Action impossible : " << typeid(*action).name() << "\n";
         }
         delete action;
     }
