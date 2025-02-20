@@ -32,6 +32,14 @@ void GOAPEnemy::checkPlayerDetected() {
 		
 	}
 }
+void GOAPEnemy::checkColision() {
+	if (player.shape.getGlobalBounds().intersects(shape.getGlobalBounds()))
+	{
+		shape.setFillColor(Color::White);
+	}
+	else
+		shape.setFillColor(Color::Magenta);
+}
 
 void GOAPEnemy::runAway() {
 	Vector2f newPosition = shape.getPosition();

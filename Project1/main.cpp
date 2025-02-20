@@ -26,7 +26,6 @@ int main() {
 
     while (window.isOpen()) {
         
-        
         Time dt = clock.restart();
         float deltaTime = dt.asSeconds();
 
@@ -37,6 +36,14 @@ int main() {
             if(event.type == Event::KeyPressed && event.key.code == Keyboard::Enter)
                 window.close();
         }
+        if (player.shape.getGlobalBounds().intersects(btEnemy.shape.getGlobalBounds()) ||
+            player.shape.getGlobalBounds().intersects(fsmEnemy.shape.getGlobalBounds()) ||
+            player.shape.getGlobalBounds().intersects(goapEnemy.enemy.shape.getGlobalBounds()))
+        {
+            player.onColision = true;
+        }
+        else
+            player.onColision = false;
 
         player.update(deltaTime, grid);
         btEnemy.update(deltaTime, grid);

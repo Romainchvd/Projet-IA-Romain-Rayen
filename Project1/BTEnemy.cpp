@@ -39,7 +39,18 @@ void BTEnemy::checkDetection()
 		PlayerDetected = 0;
 }
 
-void BTEnemy::chase(Player& player, Grid& grid)
+void BTEnemy::checkColision() {
+	if (player.shape.getGlobalBounds().intersects(shape.getGlobalBounds()))
+	{
+		player.shape.setFillColor(Color::Cyan);
+		
+	}
+	else if (!player.onColision)
+		player.shape.setFillColor(Color::Blue);
+	
+}
+
+void BTEnemy::chase()
 {
 
 
@@ -67,7 +78,11 @@ void BTEnemy::chase(Player& player, Grid& grid)
 
 }
 
-void BTEnemy::update(float deltaTime, Grid& grid) { checkDetection(); blackboard.SetValue(PlayerDetected, 1);
+void BTEnemy::update(float deltaTime, Grid& grid) {
+	checkDetection();
+	checkColision();
+	blackboard.SetValue(PlayerDetected, 1);
+	
 
 if (auto* sequenceNode = dynamic_cast<SequenceNode*>(root->getChildren()[0].get()))
 {

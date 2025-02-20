@@ -3,7 +3,8 @@
 NodeState ActionNode::execute() {
     if (actionName == "Suivre")
     {
-        enemy.chase(player, grid);
+        enemy.chase();
+        
     }
     else
     {

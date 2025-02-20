@@ -11,6 +11,7 @@ public:
 	void runFSM(float deltaTime);
 	void chase();
 	void checkDetection();
+	void checkColision();
 	void search(float deltaTime);
 	Vector2f lastPlayerPosition;
 	Grid& grid;

@@ -2,6 +2,7 @@
 #define PLAYER_HPP
 
 #include "Entity.hpp"
+class Enemy;
 
 
 class Player : public Entity {
@@ -15,6 +16,7 @@ public:
     void update(float deltaTime, Grid& grid) override;
     int detectionMargin = 100;
     int endOfDetectionMargin = 125;
+    bool onColision = false;
 
 };
 

@@ -22,7 +22,9 @@ void FSMEnemy::patrol() {
 }
 void FSMEnemy::update(float deltaTime, Grid& grid) {
     checkDetection();
+    checkColision();
     runFSM(deltaTime);
+
 }
 
 void FSMEnemy::runFSM(float deltaTime)
@@ -55,6 +57,15 @@ void FSMEnemy::checkDetection()
     }
     else
         PlayerDetected = 0;
+}
+void FSMEnemy::checkColision() {
+    if (player.shape.getGlobalBounds().intersects(shape.getGlobalBounds()))
+    {
+        player.shape.setFillColor(Color::Cyan);
+        player.onColision = true;
+    }
+    else if (!player.onColision)
+        player.shape.setFillColor(Color::Blue);
 }
 void FSMEnemy::chase()
 {

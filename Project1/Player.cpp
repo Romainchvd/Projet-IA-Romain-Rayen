@@ -1,6 +1,8 @@
 // player.cpp
 #include "Player.hpp"
 #include <SFML/Window/Keyboard.hpp>
+#include <iostream>
+#include "Enemy.hpp"
 
 using namespace std;
 using namespace sf;
@@ -38,5 +40,5 @@ void Player::update(float deltaTime, Grid& grid) {
     endOfDetectionArea.top = shape.getGlobalBounds().top - endOfDetectionMargin;
     endOfDetectionArea.height = shape.getGlobalBounds().height + endOfDetectionMargin * 2;
     endOfDetectionArea.width = shape.getGlobalBounds().width + endOfDetectionMargin * 2;
-    
 }
+

@@ -13,5 +13,6 @@ public:
     void patrol() override;
     void runAway();
     void checkPlayerDetected();
+    void checkColision();
     GOAPEnemy(float x, float y, Player& player, Grid& grid);
 };

@@ -3,6 +3,7 @@
 void GOAPAgent::PerformActions() {
     Goal goal;
     enemy.checkPlayerDetected();
+    enemy.checkColision();
     if (enemy.PlayerDetected)
         goal = Goal::Fuir;
     else

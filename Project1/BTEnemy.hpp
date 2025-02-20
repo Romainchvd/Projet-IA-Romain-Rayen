@@ -14,9 +14,10 @@ public:
 	Player& player;
 	int PlayerDetected = 0;
 	void update(float deltaTime, Grid& grid) override;
-	void chase(Player& player, Grid& grid);
+	void chase();
 	void patrol() override;
 	void checkDetection();
+	void checkColision();
 	BTEnemy(float posX, float posY, Grid& grid, Player& player);
 
 };
