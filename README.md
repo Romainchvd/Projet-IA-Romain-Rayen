@@ -54,9 +54,9 @@ Le projet étant avant tout une démonstration technique, il n'utilise aucune te
 
 La répartition des rôles s'est effectuée comme suit:
 Romain : Documentation, PowerPoint, behavior tree, GOAP, Structure du code
-Rayen: FSM*
+Rayen: FSM(1)
 
-* : Rayen a codé le FSM en étant largement aidé de Romain du fait de difficultés. Une version du FSM intégralement codé par Rayen a été abandonnée car elle ne fonctionnait pas.
+1 : Rayen a codé le FSM en étant largement aidé de Romain du fait de difficultés. Une version du FSM intégralement codé par Rayen a été abandonnée car elle ne fonctionnait pas.
 
 Le planning se présente ainsi:
 
