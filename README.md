@@ -41,10 +41,13 @@ Le GOAPEnemy possède deux actions: sa patrouille est similaire à celle du BTEn
 touche, le GOAPEnemy devient blanc. Lorsqu'il arrive dans un périmètre de 120 pixels autour du joueur, il retourne patrouiller. Il possède les mêmes problèmes de colisions lors de sa 
 patrouille que les autres ennemis.
 
-Touches concernant les ennemis:
+Touches de debug:
 F désactive ou réactive le FSMEnemy
 G désactive ou réactive le GOAPEnemy
 B désactive ou réactive le BTEnemy
+P met le jeu en pause ou le remet en marche
+O désactive l'affichage de toutes les shapes sans mettre en pause le jeu
+I réactive l'affichage de toutes les shapes sans sortir de la pause le cas échant
 
 # Graphismes et direction artistique
 
