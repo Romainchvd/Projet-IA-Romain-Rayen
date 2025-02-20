@@ -9,6 +9,17 @@ using namespace sf;
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;
 
+bool doDrawBT = true;
+bool doDrawFSM = true;
+bool doDrawGOAP = true;
+
+void toggle(bool& boolean)
+{
+    if (boolean)
+        boolean = false;
+    else
+        boolean = true;
+}
 
 int main() {
     RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Jeu SFML - IA Ennemis");
@@ -33,8 +44,17 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == Event::Closed)
                 window.close();
-            if(event.type == Event::KeyPressed && event.key.code == Keyboard::Enter)
+            if (event.type == Event::KeyPressed)
+            {
+                if(event.key.code == Keyboard::Enter)
                 window.close();
+                if (event.key.code == Keyboard::G)
+                    toggle(doDrawGOAP);
+                if (event.key.code == Keyboard::F)
+                    toggle(doDrawFSM);
+                if (event.key.code == Keyboard::B)
+                    toggle(doDrawBT);
+            }
         }
         if (player.shape.getGlobalBounds().intersects(btEnemy.shape.getGlobalBounds()) ||
             player.shape.getGlobalBounds().intersects(fsmEnemy.shape.getGlobalBounds()) ||
@@ -52,9 +72,12 @@ int main() {
 
         window.clear();
         grid.draw(window);
-        window.draw(player.shape);       
+        window.draw(player.shape);
+        if(doDrawBT)
         window.draw(btEnemy.shape);
+        if(doDrawFSM)
         window.draw(fsmEnemy.shape);
+        if(doDrawGOAP)
         window.draw(goapEnemy.enemy.shape);
         window.display();
     }
