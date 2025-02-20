@@ -21,12 +21,16 @@ void GOAPEnemy::patrol() {
 GOAPEnemy::GOAPEnemy(float x, float y, Player& player, Grid& grid) : Enemy(x, y), player(player), grid(grid) { shape.setFillColor(Color::Magenta); }
 
 void GOAPEnemy::checkPlayerDetected() {
-	if (player.hitbox.intersects(shape.getGlobalBounds()))
+	if (player.hitbox.intersects(shape.getGlobalBounds()) && !PlayerDetected && player.detectionClock.getElapsedTime().asSeconds() > player.detectionCooldown.asSeconds())
 	{
 		PlayerDetected = true;
+		player.detectionClock.restart();
 	}
-	else
+	else if (PlayerDetected && player.endOfDetectionArea.intersects(shape.getGlobalBounds()) && !player.hitbox.intersects(shape.getGlobalBounds()))
+	{
 		PlayerDetected = false;
+		
+	}
 }
 
 void GOAPEnemy::runAway() {

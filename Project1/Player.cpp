@@ -33,4 +33,10 @@ void Player::update(float deltaTime, Grid& grid) {
     hitbox.top = shape.getGlobalBounds().top - detectionMargin;
     hitbox.height = shape.getGlobalBounds().height + detectionMargin * 2;
     hitbox.width = shape.getGlobalBounds().width + detectionMargin * 2;
+
+    endOfDetectionArea.left = shape.getGlobalBounds().left - endOfDetectionMargin;
+    endOfDetectionArea.top = shape.getGlobalBounds().top - endOfDetectionMargin;
+    endOfDetectionArea.height = shape.getGlobalBounds().height + endOfDetectionMargin * 2;
+    endOfDetectionArea.width = shape.getGlobalBounds().width + endOfDetectionMargin * 2;
+    
 }

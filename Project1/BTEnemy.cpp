@@ -11,6 +11,7 @@ BTEnemy::BTEnemy(float posX, float posY, Grid& grid, Player& player) : Enemy(pos
 
 void BTEnemy::patrol()
 {
+
 	static int currentWaypoint = 0;
 	static Vector2f waypoints[2] = { Vector2f(75, 100), Vector2f(75, 300) };
 	Vector2f target = waypoints[currentWaypoint];
